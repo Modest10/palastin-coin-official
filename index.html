@@ -1,60 +1,785 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PALASTIN Coin – Freedom for Gaza</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #000, #111, #222);
-      color: #00ff99;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .logo {
-      max-width: 150px;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 3em;
-      color: #00ff88;
-      margin-bottom: 10px;
-    }
-    .tagline {
-      font-size: 1.2em;
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 30px;
-      margin: 10px;
-      border-radius: 8px;
-      background-color: #00ff88;
-      color: #000;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    footer {
-      margin-top: 60px;
-      font-size: 0.8em;
-      color: #666;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PALASTIN Coin (PLS) - Freedom. Justice. Future.</title>
+    <!-- تضمين Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* خط Inter من Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* خلفية داكنة */
+            color: #e6edf3; /* لون النص الفاتح */
+        }
+        /* التمرير السلس للروابط الداخلية */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* تصميم الأزرار */
+        .btn-primary {
+            @apply bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105;
+        }
+        .btn-secondary {
+            @apply bg-gray-700 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-105;
+        }
+        /* أنماط خلفية ديناميكية وتأثيرات Web3 */
+        .hero-background {
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczM_Xz2S9jF0q-jD7K3j_0o7l0-k1r0yL3k3uS6uL2k0M0tQ5w5oY6uW9w7z_0o3h8o9u8i6f8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8=w1920-h1080'); /* صورة الشعار كخلفية */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-attachment: fixed; /* لتأثير Parallax خفيف */
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(13, 17, 23, 0.7) 0%, rgba(13, 17, 23, 1) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        /* Tailwind animations for fade-in */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 1s ease-out forwards;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        .animate-fade-in-up.delay-300 {
+            animation-delay: 0.3s;
+        }
+        /* Simple pulse animation for background */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.05; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+        /* FAQ accordion styles */
+        .accordion-button {
+            @apply flex justify-between items-center w-full p-4 text-lg font-semibold text-white bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer transition-colors duration-200;
+        }
+        .accordion-content {
+            @apply p-4 bg-gray-800 text-gray-300 rounded-b-lg;
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            display: block;
+            max-height: 500px; /* Adjust as needed */
+        }
+    </style>
 </head>
-<body>
+<body class="font-inter">
+    <!-- رأس الصفحة (Header) - شريط التنقل -->
+    <header class="bg-gray-900 shadow-md py-4 sticky top-0 z-50">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <!-- شعار العملة PALASTIN Coin -->
+            <a href="#hero" class="text-3xl font-bold text-green-500 rounded-lg p-2 hover:bg-gray-800 transition-colors">
+                PALASTIN Coin
+            </a>
+            <!-- قائمة التنقل -->
+            <ul class="flex space-x-6 space-x-reverse">
+                <li><a href="#hero" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">الرئيسية</a></li>
+                <li><a href="#about" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">عن العملة</a></li>
+                <li><a href="#whitepaper-ai-assistant" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">مساعد الورقة البيضاء</a></li>
+                <li><a href="#tokenomics" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">اقتصاديات العملة</a></li>
+                <li><a href="#roadmap" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">خارطة الطريق</a></li>
+                <li><a href="#team" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">الفريق</a></li>
+                <li><a href="#partners" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">الشركاء</a></li>
+                <li><a href="#faq" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">الأسئلة الشائعة</a></li>
+                <li><a href="#contact" class="text-gray-300 hover:text-green-400 text-lg font-medium transition-colors">اتصل بنا</a></li>
+                <li><a href="#ico" class="btn-primary text-sm py-2 px-4 rounded-lg">شارك في الاكتتاب (ICO)</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/logo.png" alt="PALASTIN Coin Logo" class="logo" />
-  
-  <h1>PALASTIN Coin</h1>
-  <div class="tagline">The Freedom Currency for Gaza 🇵🇸</div>
+    <!-- قسم الصفحة الرئيسية (Hero Section) -->
+    <section id="hero" class="relative hero-background min-h-screen flex items-center justify-center text-center p-8 overflow-hidden" style="background-image: url('https://lh3.googleusercontent.com/pw/AP1GczM_Xz2S9jF0q-jD7K3j_0o7l0-k1r0yL3k3uS6uL2k0M0tQ5w5oY6uW9w7z_0o3h8o9u8i6f8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8=w1920-h1080'); background-color: #0d1117;">
+        <div class="relative z-10 max-w-4xl mx-auto hero-content">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczM_Xz2S9jF0q-jD7K3j_0o7l0-k1r0yL3k3uS6uL2k0M0tQ5w5oY6uW9w7z_0o3h8o9u8i6f8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8o8=w1920-h1080" alt="[Image of PALASTIN Coin Logo]" class="w-48 h-48 mx-auto mb-8 rounded-full shadow-lg border-4 border-green-500">
+            <h1 class="text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-down">
+                <span class="text-green-500">PALASTIN Coin (PLS)</span> - Freedom. Justice. Future.
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 leading-relaxed animate-fade-in-up">
+                عملة تمثل الحرية والدعم الإنساني، تُمكّن المستخدمين من المساهمة في بناء مستقبل عادل عبر التمويل اللامركزي.
+            </p>
+            <p class="text-2xl font-bold text-red-500 mb-10 animate-fade-in-up delay-400">
+                Children of Gaza deserve a better life.
+            </p>
+            <div class="space-x-4 space-x-reverse animate-fade-in-up delay-500">
+                <a href="#ico" class="btn-primary">
+                    شارك في الاكتتاب الآن
+                </a>
+                <a href="https://example.com/palastin_whitepaper.pdf" target="_blank" class="btn-secondary">
+                    تحميل الورقة البيضاء
+                </a>
+                <button id="connectWalletBtn" class="btn-secondary">
+                    ربط محفظة MetaMask
+                </button>
+            </div>
+            <p id="walletStatus" class="text-sm text-gray-400 mt-4"></p>
+        </div>
+    </section>
 
-  <a href="https://t.me/imissac_trading24" class="btn">Join our Telegram</a>
-  <a href="#" class="btn">Buy Now (Soon)</a>
+    <!-- قسم عن العملة (About Section) -->
+    <section id="about" class="bg-gray-800 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">عن <span class="text-green-500">PALASTIN Coin</span></h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-right">
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        PALASTIN Coin (PLS) هي عملة رقمية رائدة مصممة لتمثيل الحرية والدعم الإنساني، وتهدف إلى بناء مستقبل عادل عبر التمويل اللامركزي. نهدف إلى تمكين المستخدمين من المساهمة الفعالة في دعم المبادرات الإنسانية وتقديم حلول مبتكرة في هذا المجال.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        تعتمد عملتنا على شبكة **BNB Smart Chain (BEP-20)** لضمان الشفافية، الأمان، والكفاءة، وتقديم معاملات سريعة وبتكاليف منخفضة. فريقنا ملتزم بتحقيق رؤيتنا وتقديم تجربة فريدة لمجتمعنا.
+                    </p>
+                    <a href="https://example.com/palastin_whitepaper.pdf" target="_blank" class="text-blue-400 hover:text-blue-500 mt-6 inline-block text-lg font-medium">
+                        اقرأ الورقة البيضاء الخاصة بنا
+                    </a>
+                    <p class="text-gray-400 mt-4 text-sm">
+                        عنوان العقد الذكي (BEP-20): <span class="font-bold text-white">0x... (سيتم توفيره قريباً بعد النشر)</span>
+                        <a href="https://bscscan.com/address/0x..." target="_blank" class="text-blue-400 hover:underline text-xs">(عرض على BscScan)</a>
+                    </p>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://placehold.co/600x400/2d3748/a0aec0?text=Our+Vision" alt="[Image of Our Vision]" class="rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>© 2025 PALASTIN Coin. All rights reserved.</footer>
+    <!-- قسم مساعد الورقة البيضاء بالذكاء الاصطناعي (AI Whitepaper Assistant) -->
+    <section id="whitepaper-ai-assistant" class="bg-gray-900 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">مساعد الورقة البيضاء بالذكاء الاصطناعي ✨</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                الصق جزءًا من ورقتنا البيضاء هنا ودع الذكاء الاصطناعي يشرحها لك أو يلخصها!
+            </p>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <textarea id="whitepaperInput" class="w-full h-48 p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 mb-6" placeholder="الصق نص الورقة البيضاء هنا..."></textarea>
+                <button id="explainButton" class="btn-primary text-xl px-8 py-3 mb-6">
+                    شرح أو تلخيص ✨
+                </button>
+                <div id="loadingIndicator" class="hidden text-green-400 text-lg mt-4">
+                    جاري التحميل...
+                </div>
+                <div id="aiResponse" class="text-right bg-gray-700 p-6 rounded-lg text-gray-300 leading-relaxed whitespace-pre-wrap">
+                    <!-- سيتم عرض إجابة الذكاء الاصطناعي هنا -->
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- قسم اقتصاديات العملة (Tokenomics) -->
+    <section id="tokenomics" class="bg-gray-800 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">اقتصاديات عملة <span class="text-green-500">PALASTIN Coin</span></h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                تصميم اقتصاد عملتنا يهدف إلى تحقيق النمو المستدام والعدالة في التوزيع، مع ضمان الفائدة الحقيقية لحاملي العملة.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- عنصر توزيع: إجمالي العرض -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">إجمالي العرض</h3>
+                    <p class="text-4xl font-bold text-white">500,000,000</p>
+                    <p class="text-gray-400 mt-2">PLS</p>
+                </div>
+                <!-- عنصر توزيع: الاكتتاب العام -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">الاكتتاب العام (ICO)</h3>
+                    <p class="text-4xl font-bold text-white">40%</p>
+                    <p class="text-gray-400 mt-2">متاح للمستثمرين</p>
+                </div>
+                <!-- عنصر توزيع: الفريق -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">الفريق</h3>
+                    <p class="text-4xl font-bold text-white">15%</p>
+                    <p class="text-gray-400 mt-2">دعم الابتكار والقيادة</p>
+                </div>
+                <!-- عنصر توزيع: التسويق -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">التسويق</h3>
+                    <p class="text-4xl font-bold text-white">15%</p>
+                    <p class="text-gray-400 mt-2">لبناء مجتمع عالمي</p>
+                </div>
+                <!-- عنصر توزيع: التطوير -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">التطوير</h3>
+                    <p class="text-4xl font-bold text-white">10%</p>
+                    <p class="text-gray-400 mt-2">لتحسين وتوسيع المنصة</p>
+                </div>
+                <!-- عنصر توزيع: السيولة -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">السيولة</h3>
+                    <p class="text-4xl font-bold text-white">10%</p>
+                    <p class="text-gray-400 mt-2">لاستقرار السوق</p>
+                </div>
+                <!-- عنصر توزيع: المكافآت والشراكات -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">المكافآت والشراكات</h3>
+                    <p class="text-4xl font-bold text-white">10%</p>
+                    <p class="text-gray-400 mt-2">لتحفيز المجتمع والدعم الإنساني</p>
+                </div>
+            </div>
+            <div class="mt-12 text-right">
+                <h3 class="text-3xl font-bold text-white mb-6">فائدة العملة (Utility)</h3>
+                <ul class="list-disc list-inside text-gray-300 text-xl space-y-2">
+                    <li>الدفع داخل المنصة</li>
+                    <li>التصويت (حوكمة مستقبلًا)</li>
+                    <li>الوصول لميزات خاصة</li>
+                    <li>دعم المبادرات الإنسانية</li>
+                    <li>مكافآت Staking مستقبلًا</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم خارطة الطريق (Roadmap) -->
+    <section id="roadmap" class="bg-gray-900 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-16">خارطة طريق <span class="text-green-500">PALASTIN Coin</span></h2>
+            <div class="relative">
+                <!-- خط زمني مركزي -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-green-600 h-full hidden md:block"></div>
+
+                <!-- نقاط خارطة الطريق -->
+                <div class="flex flex-col items-center">
+                    <!-- نقطة خارطة طريق 1 -->
+                    <div class="relative mb-12 flex flex-col md:flex-row items-center w-full">
+                        <div class="md:w-1/2 md:pr-12 text-center md:text-left">
+                            <h3 class="text-3xl font-semibold text-green-400 mb-2">الربع الثاني - 2025</h3>
+                            <ul class="list-disc list-inside text-gray-300 text-lg">
+                                <li>إعداد العقد الذكي</li>
+                                <li>إطلاق الموقع الأولي</li>
+                                <li>تصميم الشعار الرسمي</li>
+                                <li>تجهيز الورقة البيضاء</li>
+                                <li>إطلاق الفكرة والاسم والشعار</li>
+                            </ul>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-green-600 rounded-full absolute left-1/2 transform -translate-x-1/2 border-4 border-gray-900"></div>
+                        <div class="md:w-1/2 md:pl-12"></div>
+                    </div>
+
+                    <!-- نقطة خارطة طريق 2 -->
+                    <div class="relative mb-12 flex flex-col md:flex-row-reverse items-center w-full">
+                        <div class="md:w-1/2 md:pl-12 text-center md:text-right">
+                            <h3 class="text-3xl font-semibold text-green-400 mb-2">الربع الثالث - 2025</h3>
+                            <ul class="list-disc list-inside text-gray-300 text-lg">
+                                <li>بدء حملة التسويق العالمية</li>
+                                <li>إطلاق الاكتتاب الأولي (ICO)</li>
+                                <li>إدراج على PancakeSwap</li>
+                            </ul>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-green-600 rounded-full absolute left-1/2 transform -translate-x-1/2 border-4 border-gray-900"></div>
+                        <div class="md:w-1/2 md:pr-12"></div>
+                    </div>
+
+                    <!-- نقطة خارطة طريق 3 -->
+                    <div class="relative mb-12 flex flex-col md:flex-row items-center w-full">
+                        <div class="md:w-1/2 md:pr-12 text-center md:text-left">
+                            <h3 class="text-3xl font-semibold text-green-400 mb-2">الربع الرابع - 2025</h3>
+                            <ul class="list-disc list-inside text-gray-300 text-lg">
+                                <li>تطوير محفظة PALASTIN اللامركزية</li>
+                                <li>إدراج على منصات مركزية (CEX Listing)</li>
+                                <li>بدء أول شراكة إنسانية كبرى</li>
+                            </ul>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-green-600 rounded-full absolute left-1/2 transform -translate-x-1/2 border-4 border-gray-900"></div>
+                        <div class="md:w-1/2 md:pl-12"></div>
+                    </div>
+
+                    <!-- نقطة خارطة طريق 4 -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-center w-full">
+                        <div class="md:w-1/2 md:pl-12 text-center md:text-right">
+                            <h3 class="text-3xl font-semibold text-green-400 mb-2">2026 وما بعده</h3>
+                            <ul class="list-disc list-inside text-gray-300 text-lg">
+                                <li>توسيع النظام البيئي لـ PALASTIN Coin</li>
+                                <li>إطلاق منتجات داعمة جديدة</li>
+                                <li>بناء DAO للتحكم المجتمعي الكامل</li>
+                            </ul>
+                        </div>
+                        <div class="hidden md:block w-8 h-8 bg-green-600 rounded-full absolute left-1/2 transform -translate-x-1/2 border-4 border-gray-900"></div>
+                        <div class="md:w-1/2 md:pr-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الفريق (Team) -->
+    <section id="team" class="bg-gray-800 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">تعرف على فريق <span class="text-green-500">PALASTIN Coin</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- عضو الفريق 1 -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                    <img src="https://placehold.co/150x150/0f172a/60a5fa?text=Modeste.Isc" alt="[Image of Modeste.Isc]" class="rounded-full w-32 h-32 mx-auto mb-6 border-4 border-green-500">
+                    <h3 class="text-3xl font-semibold text-white mb-2">Modeste.Isc</h3>
+                    <p class="text-green-400 text-lg mb-4">الإدارة العامة</p>
+                    <p class="text-gray-300 text-base">قائد رؤيوي يقود مشروع PALASTIN Coin نحو تحقيق أهدافه النبيلة.</p>
+                </div>
+                <!-- رسالة عن باقي الفريق -->
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg col-span-full md:col-span-2 lg:col-span-2 flex items-center justify-center">
+                    <p class="text-2xl text-gray-300 italic">
+                        "سيتم الإعلان عن باقي أعضاء الفريق المتميزين قريبًا، ترقبوا المزيد من التحديثات!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الشركاء والمستشارين (Partners & Advisors) -->
+    <section id="partners" class="bg-gray-900 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">شركاؤنا ومستشارونا</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                نحن فخورون بالعمل مع شركاء ومستشارين رائدين في مجال البلوكتشين والعمل الإنساني.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-center">
+                <!-- شعار الشريك 1 (مثال) -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md flex justify-center items-center h-32">
+                    <img src="https://placehold.co/120x60/374151/d1d5db?text=Partner+1" alt="[Image of Partner 1 Logo]" class="max-h-full max-w-full object-contain">
+                </div>
+                <!-- شعار الشريك 2 (مثال) -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md flex justify-center items-center h-32">
+                    <img src="https://placehold.co/120x60/374151/d1d5db?text=Partner+2" alt="[Image of Partner 2 Logo]" class="max-h-full max-w-full object-contain">
+                </div>
+                <!-- شعار الشريك 3 (مثال) -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md flex justify-center items-center h-32">
+                    <img src="https://placehold.co/120x60/374151/d1d5db?text=Advisor+1" alt="[Image of Advisor 1 Logo]" class="max-h-full max-w-full object-contain">
+                </div>
+                <!-- رسالة عن الشركاء القادمين -->
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md flex justify-center items-center h-32 col-span-full md:col-span-1 lg:col-span-1">
+                    <p class="text-lg text-gray-400 italic">المزيد قريباً!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاكتتاب (ICO Section) -->
+    <section id="ico" class="bg-gray-800 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">شارك في الاكتتاب الأولي لـ <span class="text-green-500">PALASTIN Coin</span></h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-4xl mx-auto">
+                فرصتك للانضمام إلى مشروع PLS في مراحله الأولى والحصول على عملاتنا بأسعار مميزة قبل الإطلاق العام.
+            </p>
+
+            <div class="bg-gray-900 p-10 rounded-xl shadow-2xl mb-12 max-w-3xl mx-auto">
+                <h3 class="text-4xl font-bold text-green-400 mb-6">مراحل الاكتتاب (ICO Phases)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xl mb-8">
+                    <div class="p-4 bg-gray-700 rounded-lg shadow-inner">
+                        <p class="text-gray-300">المرحلة 1: <span class="font-bold text-white">0.008 USDT / PLS</span></p>
+                    </div>
+                    <div class="p-4 bg-gray-700 rounded-lg shadow-inner">
+                        <p class="text-gray-300">المرحلة 2: <span class="font-bold text-white">0.009 USDT / PLS</span></p>
+                    </div>
+                    <div class="p-4 bg-gray-700 rounded-lg shadow-inner">
+                        <p class="text-gray-300">المرحلة 3: <span class="font-bold text-white">0.01 USDT / PLS</span></p>
+                    </div>
+                </div>
+
+                <p class="text-lg text-gray-300 mb-6">السعر الحالي: <span class="font-bold text-white">0.01 USDT لكل PLS</span></p>
+                <p class="text-lg text-gray-300 mb-6">الحد الأدنى للمشاركة: <span class="font-bold text-white">10 USDT</span></p>
+                <p class="text-lg text-gray-300 mb-6">العملات المقبولة: <span class="font-bold text-white">BNB, USDT (BEP-20)</span></p>
+
+                <!-- شريط التقدم الافتراضي للاكتتاب -->
+                <div class="mb-8">
+                    <p class="text-lg text-gray-300 mb-2">التقدم المحرز: <span class="font-bold text-white" id="icoProgressText">0%</span> تم بيعه (بيانات حية ستعرض هنا)</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 0%;" id="icoProgressBar"></div>
+                    </div>
+                </div>
+
+                <!-- عد تنازلي -->
+                <div class="mb-10">
+                    <h4 class="text-2xl font-semibold text-white mb-4">ينتهي الاكتتاب في:</h4>
+                    <div id="countdown" class="text-5xl font-extrabold text-green-500">
+                        <span id="days">00</span> يوم
+                        <span id="hours">00</span> ساعة
+                        <span id="minutes">00</span> دقيقة
+                        <span id="seconds">00</span> ثانية
+                    </div>
+                </div>
+
+                <a href="#" class="btn-primary text-2xl px-10 py-4">
+                    انضم إلى الاكتتاب الآن!
+                </a>
+                <p class="text-gray-400 text-sm mt-4">يرجى قراءة الورقة البيضاء وشروط المشاركة قبل الاستثمار.</p>
+                <p class="text-red-500 text-2xl font-bold mt-8">
+                    Decentralized freedom. PALASTIN Coin.
+                </p>
+            </div>
+
+            <!-- كيفية الشراء -->
+            <div class="max-w-4xl mx-auto mt-16 text-right">
+                <h3 class="text-4xl font-bold text-white mb-8">كيفية المشاركة في الاكتتاب؟</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- خطوة 1 -->
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border-b-4 border-green-500">
+                        <div class="text-green-500 text-5xl font-extrabold mb-4">1.</div>
+                        <h4 class="text-2xl font-semibold text-white mb-4">ربط محفظة MetaMask</h4>
+                        <p class="text-gray-300">تأكد من أن لديك MetaMask مثبتة ومتصلة بشبكة BNB Smart Chain.</p>
+                    </div>
+                    <!-- خطوة 2 -->
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border-b-4 border-green-500">
+                        <div class="text-green-500 text-5xl font-extrabold mb-4">2.</div>
+                        <h4 class="text-2xl font-semibold text-white mb-4">اختر المبلغ</h4>
+                        <p class="text-gray-300">حدد كمية PLS التي ترغب في شرائها باستخدام BNB أو USDT.</p>
+                    </div>
+                    <!-- خطوة 3 -->
+                    <div class="bg-gray-900 p-8 rounded-xl shadow-lg border-b-4 border-green-500">
+                        <div class="text-green-500 text-5xl font-extrabold mb-4">3.</div>
+                        <h4 class="text-2xl font-semibold text-white mb-4">أكمل المعاملة</h4>
+                        <p class="text-gray-300">أكد معاملتك عبر MetaMask واستلم PLS فوراً في محفظتك.</p>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <p class="text-xl text-red-500 font-bold">
+                        (نموذج الشراء المباشر والربط بعقد الاكتتاب الذكي سيتم تفعيلهما قريباً بعد التدقيق الأمني والنشر)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأسئلة الشائعة (FAQ) -->
+    <section id="faq" class="bg-gray-900 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">الأسئلة الشائعة</h2>
+            <div class="max-w-3xl mx-auto text-right">
+                <!-- سؤال 1 -->
+                <div class="mb-4">
+                    <button class="accordion-button">
+                        ما هي PALASTIN Coin (PLS)؟
+                        <span>+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>PALASTIN Coin (PLS) هي عملة رقمية تمثل الحرية والدعم الإنساني، وتهدف إلى تمكين المستخدمين من المساهمة في بناء مستقبل عادل عبر التمويل اللامركزي. هي مبنية على شبكة BNB Smart Chain (BEP-20).</p>
+                    </div>
+                </div>
+                <!-- سؤال 2 -->
+                <div class="mb-4">
+                    <button class="accordion-button">
+                        ما هي فائدة عملة PLS؟
+                        <span>+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>تتمتع عملة PLS بفوائد متعددة بما في ذلك: الدفع داخل المنصة، التصويت في الحوكمة المستقبلية للمشروع، الوصول لميزات حصرية، دعم المبادرات الإنسانية، وإمكانية Staking للحصول على مكافآت مستقبلًا.</p>
+                    </div>
+                </div>
+                <!-- سؤال 3 -->
+                <div class="mb-4">
+                    <button class="accordion-button">
+                        كيف يمكنني المشاركة في الاكتتاب (ICO)؟
+                        <span>+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>للمشاركة في الاكتتاب، ستحتاج إلى ربط محفظة MetaMask الخاصة بك بموقعنا والتأكد من أنها متصلة بشبكة BNB Smart Chain. يمكنك بعد ذلك شراء PLS باستخدام BNB أو USDT. ستتوفر واجهة شراء مباشرة قريبًا.</p>
+                    </div>
+                </div>
+                <!-- سؤال 4 -->
+                <div class="mb-4">
+                    <button class="accordion-button">
+                        ما هو تاريخ بدء وانتهاء الاكتتاب؟
+                        <span>+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>يبدأ الاكتتاب في 15 يوليو 2025 وينتهي في 15 أغسطس 2025. ترقبوا العد التنازلي على صفحة الاكتتاب لمتابعة الوقت المتبقي.</p>
+                    </div>
+                </div>
+                <!-- سؤال 5 -->
+                <div class="mb-4">
+                    <button class="accordion-button">
+                        هل تم تدقيق العقد الذكي لـ PLS؟
+                        <span>+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>نحن نولي الأمان أولوية قصوى. العقد الذكي الخاص بـ PLS سيخضع لتدقيق أمني شامل من قبل شركات مستقلة قبل الإطلاق الكامل. سيتم نشر تقرير التدقيق على الموقع بمجرد اكتماله.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا (Contact Us) -->
+    <section id="contact" class="bg-gray-800 py-20 px-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-white mb-12">اتصل بنا</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                إذا كان لديك أي أسئلة أو استفسارات إضافية، فلا تتردد في التواصل معنا.
+            </p>
+            <div class="max-w-xl mx-auto bg-gray-900 p-8 rounded-xl shadow-lg text-right">
+                <p class="text-lg text-gray-300 mb-4">
+                    البريد الإلكتروني: <a href="mailto:info@palastincoin.com" class="text-green-400 hover:underline">info@palastincoin.com</a>
+                </p>
+                <p class="text-lg text-gray-300 mb-4">
+                    انضم إلى مجتمعنا على تيليجرام: <a href="https://t.me/+tjSG_X3Sy_84ZTU0" target="_blank" class="text-green-400 hover:underline">t.me/PalastinCoinCommunity</a>
+                </p>
+                <p class="text-lg text-gray-300 mb-4">
+                    تابعنا على X (تويتر): <a href="#" target="_blank" class="text-green-400 hover:underline">@PalastinCoin</a>
+                </p>
+                <p class="text-lg text-gray-300">
+                    انضم إلى ديسكورد: <a href="#" target="_blank" class="text-green-400 hover:underline">discord.gg/PalastinCoin</a>
+                </p>
+                <!-- يمكن إضافة نموذج اتصال هنا لاحقاً إذا لزم الأمر -->
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer class="bg-gray-900 py-12 px-8">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-right">
+            <div class="mb-6 md:mb-0">
+                <a href="#hero" class="text-2xl font-bold text-green-500">
+                    PALASTIN Coin
+                </a>
+                <p class="text-gray-400 mt-2">© 2025 جميع الحقوق محفوظة.</p>
+            </div>
+            <div class="flex space-x-6 space-x-reverse mb-6 md:mb-0">
+                <a href="https://example.com/privacy-policy.pdf" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors">سياسة الخصوصية</a>
+                <a href="https://example.com/terms-of-service.pdf" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors">شروط الخدمة</a>
+            </div>
+            <!-- أيقونات التواصل الاجتماعي -->
+            <div class="flex space-x-4 space-x-reverse">
+                <a href="https://t.me/+tjSG_X3Sy_84ZTU0" target="_blank" class="text-gray-400 hover:text-green-500 text-3xl transition-colors" title="Telegram">
+                    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0C5.372 0 0 5.372 0 12C0 18.064 4.394 23.018 10.28 23.957C10.985 24.084 11.233 23.633 11.233 23.235V20.887C7.031 21.848 6.136 19.865 6.136 19.865C5.437 18.077 4.542 17.587 4.542 17.587C3.398 16.809 4.63 16.824 4.63 16.824C5.892 16.92 6.549 18.001 6.848 18.571C8.012 20.472 9.948 19.914 10.74 19.626C10.865 18.77 11.206 18.188 11.583 17.848C8.368 17.491 5.035 16.208 5.035 10.639C5.035 9.17 5.568 7.973 6.467 7.02C6.311 6.666 5.792 5.068 6.64 2.915C6.64 2.915 7.747 2.569 11.233 4.887C12.274 4.604 13.364 4.464 14.453 4.464C15.542 4.464 16.632 4.604 17.673 4.887C21.16 2.569 22.266 2.915 22.266 2.915C23.114 5.068 22.595 6.666 22.439 7.02C23.338 7.973 23.871 9.17 23.871 10.639C23.871 16.223 20.536 17.489 17.319 17.844C17.712 18.18 18.079 18.809 18.079 19.832V23.235C18.079 23.619 18.324 24.072 19.019 23.957C24.891 23.018 29.288 18.064 29.288 12C29.288 5.372 23.916 0 17.288 0H12Z" transform="translate(-2.6 -0.5)"/></svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-green-500 text-3xl transition-colors" title="X (Twitter)">
+                    <img src="https://placehold.co/32x32/1DA1F2/FFFFFF?text=X" alt="[Image of X icon]" class="rounded-full">
+                </a>
+                <a href="#" class="text-gray-400 hover:text-green-500 text-3xl transition-colors" title="Discord">
+                    <img src="https://placehold.co/32x32/5865F2/FFFFFF?text=DC" alt="[Image of Discord icon]" class="rounded-full">
+                </a>
+                <a href="#" class="text-gray-400 hover:text-green-500 text-3xl transition-colors" title="LinkedIn">
+                    <img src="https://placehold.co/32x32/0A66C2/FFFFFF?text=LI" alt="[Image of LinkedIn icon]" class="rounded-full">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // دالة بسيطة للعد التنازلي
+        function startCountdown() {
+            const countdownDate = new Date("August 15, 2025 23:59:59").getTime(); // تاريخ انتهاء الاكتتاب
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                // حساب الأيام والساعات والدقائق والثواني
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // عرض النتيجة في العناصر
+                document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+                // إذا انتهى العد التنازلي، اكتب بعض النص
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "انتهى الاكتتاب!";
+                    const icoBtn = document.querySelector('#ico .btn-primary');
+                    if (icoBtn) {
+                        icoBtn.innerText = "انتهى الاكتتاب";
+                        icoBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                        icoBtn.removeAttribute('href');
+                    }
+                    // Hide the progress bar as ICO is over
+                    const progressBarContainer = document.querySelector('#ico .progress-bar-container');
+                    if (progressBarContainer) {
+                        progressBarContainer.style.display = 'none';
+                    }
+                    const progressText = document.getElementById('icoProgressText');
+                    if (progressText) {
+                         progressText.innerText = '100%'; // Assuming 100% sold when ICO ends
+                    }
+                }
+            }, 1000);
+        }
+
+        // بدء العد التنازلي عند تحميل الصفحة
+        window.onload = startCountdown;
+
+        // ------------- Gemini API Integration (AI Whitepaper Assistant) -------------
+        const explainButton = document.getElementById('explainButton');
+        const whitepaperInput = document.getElementById('whitepaperInput');
+        const aiResponse = document.getElementById('aiResponse');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        explainButton.addEventListener('click', async () => {
+            const promptText = whitepaperInput.value.trim();
+
+            if (!promptText) {
+                aiResponse.innerText = 'الرجاء إدخال نص من الورقة البيضاء لتلخيصه أو شرحه.';
+                return;
+            }
+
+            loadingIndicator.classList.remove('hidden'); // Show loading indicator
+            aiResponse.innerText = ''; // Clear previous response
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({
+                    role: "user",
+                    parts: [{
+                        text: `شرح أو تلخيص هذا الجزء من الورقة البيضاء لمشروع عملة رقمية، مع التركيز على الفكرة الأساسية والفائدة للمستثمرين المحتملين:\n\n${promptText}`
+                    }]
+                });
+
+                const payload = {
+                    contents: chatHistory
+                };
+                const apiKey = ""; // Leave this as-is; Canvas will provide it at runtime.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    aiResponse.innerText = text;
+                } else {
+                    aiResponse.innerText = 'عذرًا، لم أتمكن من الحصول على استجابة. الرجاء المحاولة مرة أخرى.';
+                    console.error("Unexpected API response structure:", result);
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                aiResponse.innerText = 'حدث خطأ أثناء معالجة طلبك. الرجاء التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
+            } finally {
+                loadingIndicator.classList.add('hidden'); // Hide loading indicator
+            }
+        });
+
+        // ------------- MetaMask Integration -------------
+        const connectWalletBtn = document.getElementById('connectWalletBtn');
+        const walletStatus = document.getElementById('walletStatus');
+
+        connectWalletBtn.addEventListener('click', async () => {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Request account access
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    walletStatus.innerText = `تم الاتصال بالمحفظة: ${account.substring(0, 6)}...${account.substring(account.length - 4)}`;
+
+                    // Optionally, check and switch to BNB Smart Chain
+                    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                    // BNB Smart Chain Mainnet Chain ID: 0x38 (56 in decimal)
+                    if (chainId !== '0x38') {
+                        try {
+                            await window.ethereum.request({
+                                method: 'wallet_switchEthereumChain',
+                                params: [{ chainId: '0x38' }],
+                            });
+                            walletStatus.innerText += ' (تم التبديل إلى BNB Smart Chain)';
+                        } catch (switchError) {
+                            // This error code indicates that the chain has not been added to MetaMask.
+                            if (switchError.code === 4902) {
+                                try {
+                                    await window.ethereum.request({
+                                        method: 'wallet_addEthereumChain',
+                                        params: [
+                                            {
+                                                chainId: '0x38',
+                                                chainName: 'BNB Smart Chain',
+                                                rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                                                nativeCurrency: {
+                                                    name: 'BNB',
+                                                    symbol: 'BNB',
+                                                    decimals: 18
+                                                },
+                                                blockExplorerUrls: ['https://bscscan.com']
+                                            },
+                                        ],
+                                    });
+                                    walletStatus.innerText += ' (تم إضافة BNB Smart Chain والاتصال بها)';
+                                } catch (addError) {
+                                    console.error("Error adding BSC network:", addError);
+                                    walletStatus.innerText += ' (فشل في إضافة/تبديل شبكة BSC)';
+                                }
+                            } else {
+                                console.error("Error switching network:", switchError);
+                                walletStatus.innerText += ' (فشل في التبديل للشبكة المطلوبة)';
+                            }
+                        }
+                    }
+
+                } catch (error) {
+                    console.error("User denied account access or other error:", error);
+                    walletStatus.innerText = 'فشل الاتصال بالمحفظة. يرجى التأكد من أن MetaMask مثبتة ومنح الإذن.';
+                }
+            } else {
+                walletStatus.innerText = 'MetaMask غير مثبتة. يرجى تثبيت MetaMask للمتابعة.';
+                window.open('https://metamask.io/download/', '_blank'); // Open download link
+            }
+        });
+
+        // FAQ accordion functionality
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                button.classList.toggle('active');
+                content.classList.toggle('active');
+
+                if (content.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    button.querySelector('span').innerText = '-'; // Change plus to minus
+                } else {
+                    content.style.maxHeight = '0';
+                    button.querySelector('span').innerText = '+'; // Change minus to plus
+                }
+            });
+        });
+
+        // Simulate ICO Progress (for demo purposes, replace with actual data in real app)
+        function updateICOProgress() {
+            const progressBar = document.getElementById('icoProgressBar');
+            const progressText = document.getElementById('icoProgressText');
+            // This is a dummy progress for demonstration.
+            // In a real application, this value would come from your smart contract.
+            const currentProgress = 30; // Example: 30% sold
+            if (progressBar) {
+                progressBar.style.width = currentProgress + '%';
+            }
+            if (progressText) {
+                progressText.innerText = currentProgress + '%';
+            }
+        }
+        updateICOProgress(); // Call on load
+    </script>
 </body>
 </html>
